@@ -79,7 +79,7 @@ function Register() {
               <FiUser className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-base" />
               <input
                 type="text"
-                placeholder="Prajit Kumar Singh"
+                placeholder="Yatendra"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
@@ -97,7 +97,7 @@ function Register() {
               <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-base" />
               <input
                 type="email"
-                placeholder="24005201000xx@ietlucknow.ac.in"
+                placeholder="25005201000xx@ietlucknow.ac.in"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
