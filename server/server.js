@@ -26,7 +26,8 @@ const allowedOrigins = [
   "http://flasheats-client.s3-website-us-east-1.amazonaws.com",
   "https://flasheats.onrender.com",
   "https://flash-eats.vercel.app",
-  " http://localhost:5173/"
+  "https://flash-eats-six.vercel.app",
+  "https://flasheats-0tsp.onrender.com",
 ];
 
 app.use(cors({
@@ -34,12 +35,24 @@ app.use(cors({
     // allow requests with no origin (like mobile apps, curl, Postman)
     if (!origin) return callback(null, true);
 
+    const cleanOrigin = origin.replace(/\/$/, "");
+
     // allow any localhost / 127.0.0.1 port (5173, 5174, 3000, etc.)
-    if (/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) {
+    if (/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(cleanOrigin)) {
       return callback(null, true);
     }
 
-    if (allowedOrigins.includes(origin)) {
+    // allow any Vercel deployment (*.vercel.app)
+    if (/^https:\/\/.*\.vercel\.app$/.test(cleanOrigin)) {
+      return callback(null, true);
+    }
+
+    // allow any Render deployment (*.onrender.com)
+    if (/^https:\/\/.*\.onrender\.com$/.test(cleanOrigin)) {
+      return callback(null, true);
+    }
+
+    if (allowedOrigins.map(o => o.trim().replace(/\/$/, "")).includes(cleanOrigin)) {
       return callback(null, true);
     }
 
